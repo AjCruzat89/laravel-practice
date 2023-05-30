@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserAuth;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,14 @@ use App\Http\Controllers\UserAuth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['user_auth'])->group(function (){
+    route::view('index', 'index');
 });
 
-Route::post('user',[UserAuth::class, 'userLogin']);
+Route::view('/','login');
 Route::view('login','login');
+Route::view('register','register');
+
+Route::post('save', [RegisterController::class, 'register']);
+Route::post('loginverification', [LoginController::class, 'login']);
+Route::get('logout', [LoginController::class, 'logout']);

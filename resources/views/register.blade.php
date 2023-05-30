@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
     <!-- Link BOOTSTRAP 5.3.0 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <form action="loginverification" method="post">
+    <form action="save" method="post">
         @csrf
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
             <div class="box d-flex flex-column p-3">
@@ -20,9 +20,11 @@
                 <input class="p-2" type="text" name="username" id="" placeholder="Enter username..." required>
                 <div class="h4 pt-3">Password</div>
                 <input class="p-2" type="password" name="password" id="" placeholder="Enter password..." minlength="8" required>
-                <div class="h6 pt-3"><a href="register">Dont have an account yet? Register here...</a></div>
+                <div class="h4 pt-3">Re-Enter Password</div>
+                <input class="p-2" type="password" name="rpassword" id="" placeholder="Re-Enter password..." minlength="8" required>
+                <div class="h6 pt-3"><a href="login">Already have an account? Login Here...</a></div>
                 <div class="d-flex justify-content-center align-items-center pt-3"><button
-                        class="btn btn-primary" name="submit">Login</button></div>
+                        class="btn btn-primary" name="submit">Register</button></div>
             </div>
         </div>
     </form>
