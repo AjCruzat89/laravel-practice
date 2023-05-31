@@ -44,8 +44,12 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'user_auth' => [
-            \App\Http\Middleware\UserAuthentication::class,
+        'not_logged_in' => [
+            \App\Http\Middleware\NotLoggedIn::class,
+        ],
+
+        'already_logged_in' => [
+            \App\Http\Middleware\AlreadyLoggedIn::class,
         ]
     ];
 

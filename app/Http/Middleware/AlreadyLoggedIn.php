@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserAuthentication
+class AlreadyLoggedIn
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,10 @@ class UserAuthentication
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
-        if(!session()->has('username')){
-            return redirect('login');
+        if(session()->has('username')){
+            return redirect('index');
         }
-        
+
         return $next($request);
     }
 }

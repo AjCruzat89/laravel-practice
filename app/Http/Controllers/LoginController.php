@@ -18,7 +18,6 @@ class LoginController extends Controller
 
         if($existingUser){
             session()->put('username', $username);
-            echo '<script>alert("Successfully Logged In!!")</script>';
             echo '<script>window.location.href = "index"</script>';
         }
 
