@@ -31,6 +31,7 @@ Route::middleware(['already_logged_in'])->group(function (){
 });
 
 // Controller Functions
+Route::get('index', [UsersController::class, 'ShowUsers']);
 Route::post('save', [RegisterController::class, 'register']);
 Route::post('loginverification', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout']);

@@ -12,7 +12,7 @@ class LoginController extends Controller
         $password = $request->input('password');
         $encpass = md5($password);
 
-        $existingUser = Users::where('username', $username)
+        $existingUser = Users::whereRaw('BINARY username = ?', [$username])
         ->where('password', $encpass)
         ->first();
 
