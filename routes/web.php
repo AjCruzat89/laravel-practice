@@ -19,6 +19,7 @@ use App\Http\Controllers\UsersController;
 // If the user is not logged in it will go back to login page
 Route::middleware(['not_logged_in'])->group(function (){
     Route::view('index', 'index');
+    Route::view('edit','edit');
     
 });
 
@@ -27,11 +28,15 @@ Route::middleware(['already_logged_in'])->group(function (){
     Route::view('/','login');
     Route::view('login','login');
     Route::view('register','register');
+
     
 });
 
-// Controller Functions
+// Home Page, Login, Logout Controllers
 Route::get('index', [UsersController::class, 'ShowUsers']);
 Route::post('save', [RegisterController::class, 'register']);
 Route::post('loginverification', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout']);
+
+// Admin Page Functions
+Route::get('edit/{id}', [UsersController::class, 'EditUsers']);

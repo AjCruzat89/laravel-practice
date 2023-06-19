@@ -12,4 +12,10 @@ class UsersController extends Controller
         
         return view('index', ['users' => $users]);
     }
+
+    public function EditUsers($id){
+        $users = Users::find($id);
+
+        return view ('edit', ['users' => $users]);  
+    }
 }
