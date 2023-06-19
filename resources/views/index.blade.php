@@ -31,7 +31,7 @@
                 <th scope="row">{{ $user->id }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->password }}</td>
-                <td><a class="btn btn-primary" href="edit/{{ $user->id }">Edit</a></td>
+                <td><a class="btn btn-primary" href="edit/{{ $user->id }}">Edit</a></td>
             </tr>
             @endforeach
         </tbody>

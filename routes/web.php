@@ -21,6 +21,7 @@ Route::middleware(['not_logged_in'])->group(function (){
     Route::view('index', 'index');
     Route::view('edit','edit');
     
+    Route::get('edit/{id}', [UsersController::class, 'EditUsers']);
 });
 
 // If the user is already logged in it will go back to index
@@ -38,5 +39,3 @@ Route::post('save', [RegisterController::class, 'register']);
 Route::post('loginverification', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout']);
 
-// Admin Page Functions
-Route::get('edit/{id}', [UsersController::class, 'EditUsers']);
