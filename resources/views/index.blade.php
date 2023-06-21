@@ -16,7 +16,8 @@
         <button name="logout" class="btn btn-primary">Logout</button>
     </form>
 
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table table-borderless">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">id</th>
@@ -30,12 +31,19 @@
             <tr>
                 <th scope="row">{{ $user->id }}</td>
                 <td>{{ $user->username }}</td>
-                <td>{{ $user->password }}</td>
+                <td>{{ substr($user->password, 0, 12) }}</td>
                 <td><a class="btn btn-primary" href="edit/{{ $user->id }}">Edit</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    </div>
+
+    
+    <div class="pagination p-3">
+    {{ $users->links('vendor.pagination.bootstrap-4') }}
+    </div>
+
 </body>
 
 </html>

@@ -8,7 +8,7 @@ use App\Models\Users;
 class UsersController extends Controller
 {
     public function ShowUsers(){
-        $users = Users::all();
+        $users = Users::paginate(5);
         
         return view('index', ['users' => $users]);
     }
