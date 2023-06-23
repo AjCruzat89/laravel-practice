@@ -17,6 +17,10 @@
         <button name="logout" class="btn btn-primary">Logout</button>
     </form>
 
+    <div class="d-flex justify-content-center align-items-center">
+        <input type="search" name="" id="" placeholder="Search..." class="p-1">
+    </div>
+
     <div class="table-responsive">
     <table class="table table-borderless">
         <thead class="thead-dark">
