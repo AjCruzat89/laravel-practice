@@ -1,3 +1,20 @@
 .link:hover{
     text-decoration: underline !important;
 }
+
+.alertMessage{
+    animation-name: opacity !important;
+    animation-duration: 0.5s !important;
+    animation-iteration-count: 1 !important;
+    animation-fill-mode: forwards !important;
+}
+
+@keyframes opacity {
+    from{
+        opacity: 0%;
+    }
+
+    to{
+        opacity: 100%;
+    } 
+}

@@ -31,17 +31,16 @@
 
                     <div class="d-flex flex-column gap-3 p-4 rounded" style="max-width: 430px !important; box-shadow: 3px 5px 5px 3px  rgba(0, 0, 0, 0.349); background-color: white; width: 100%;">
                         @if (isset($successMessage))
-                        <div class="alert alert-success">{{ $successMessage }}</div>
+                        <div class="alert alert-success alertMessage">{{ $successMessage }}</div>
                         <script>
                             setTimeout(function() {
                                 window.location.href = 'index';
-                            }, 300); // Redirect after 3 seconds (adjust the delay as needed)
+                            }, 1000);
                         </script>
 
-                        @endif
 
-                        @if(isset($errorMessage))
-                        <div class="alert alert-danger">{{ $errorMessage }}</div>
+                        @elseif(isset($errorMessage))
+                        <div class="alert alert-danger alertMessage">{{ $errorMessage }}</div>
                         @endif
 
                         <input class="p-2 rounded border-white" type="text" name="username" id="" placeholder="Enter Username..." required>

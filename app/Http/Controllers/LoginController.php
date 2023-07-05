@@ -19,10 +19,10 @@ class LoginController extends Controller
 
         if ($existingUser) {
             session()->put('username', $username);
-            $successMessage = 'Login successful!';
+            $successMessage = 'Login successful!!!';
             return view('login', compact('successMessage'));
         } else {
-            $errorMessage = 'Incorrect Username or Password!';
+            $errorMessage = 'Incorrect Username or Password!!!';
             return view('login', compact('errorMessage'));
         }
     }
