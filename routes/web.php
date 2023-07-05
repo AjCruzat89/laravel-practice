@@ -29,8 +29,6 @@ Route::middleware(['already_logged_in'])->group(function (){
     Route::view('/','login');
     Route::view('login','login');
     Route::view('register','register');
-
-    
 });
 
 // Home Page, Login, Logout Controllers
