@@ -11,7 +11,7 @@
 </head>
 
 <body style="background-color: rgb(230, 230, 230);">
-    <form action="loginverification" method="post">
+    <form action="{{ route('loginverification') }}" method="post">
         @csrf
         <div class="container d-flex vh-100 align-items-center">
             <div class="col row row-cols-1 row-cols-md-2 gy-4">

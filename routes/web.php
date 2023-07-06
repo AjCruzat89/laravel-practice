@@ -21,7 +21,8 @@ Route::middleware(['not_logged_in'])->group(function (){
     Route::view('index', 'index');
     Route::view('edit','edit');
     
-    Route::get('edit/{id}', [UsersController::class, 'EditUsers']);
+    Route::get('edit/{id}', [UsersController::class, 'EditUsers'])->name('edit.users');
+    Route::get('index/search', [UsersController::class, 'search'])->name('users.search');
 });
 
 // If the user is already logged in it will go back to index
@@ -34,6 +35,6 @@ Route::middleware(['already_logged_in'])->group(function (){
 // Home Page, Login, Logout Controllers
 Route::get('index', [UsersController::class, 'ShowUsers']);
 Route::post('save', [RegisterController::class, 'register']);
-Route::post('loginverification', [LoginController::class, 'login']);
-Route::get('logout', [LoginController::class, 'logout']);
+Route::post('loginverification', [LoginController::class, 'login'])->name('loginverification');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
