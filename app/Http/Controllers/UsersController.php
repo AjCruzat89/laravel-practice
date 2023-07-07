@@ -19,11 +19,21 @@ class UsersController extends Controller
         return view('index', ['users' => $users, 'currentUser' => $currentUser]);
     }
 
-    public function EditUsers($id)
-    {
-        $users = Users::find($id);
+    public function updateUsers(Request $request)
+    {        
+        if(isset($_POST['submit'])){
+            $id = $request->input('id');
+            $username = $request->input('username');
+            $password = $request->input('password');
+            $encpass = md5($password);
+            $users = Users::find($id);
+            
+            $users->username = $username;
+            $users->password = $encpass;
+            $users->save();
+            return redirect()->back();
+        }
 
-        return view('edit', ['users' => $users]);
     }
 
     public function search(Request $request)
@@ -31,7 +41,7 @@ class UsersController extends Controller
         $keyword = $request->input('keyword');
         $sessionUsername = $request->session()->get('username');
         $currentUser = Users::where('username', $sessionUsername)->first();
-        
+
 
         $users = Users::where('id', 'LIKE', "%{$keyword}%")
             ->orWhere('username', 'LIKE', "%{$keyword}%")

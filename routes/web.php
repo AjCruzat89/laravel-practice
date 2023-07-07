@@ -19,10 +19,8 @@ use App\Http\Controllers\UsersController;
 // If the user is not logged in it will go back to login page
 Route::middleware(['not_logged_in'])->group(function (){
     Route::view('index', 'index');
-    Route::view('edit','edit');
-    
-    Route::get('edit/{id}', [UsersController::class, 'EditUsers'])->name('edit.users');
-    Route::get('index/search', [UsersController::class, 'search'])->name('users.search');
+    Route::post('index/edit', [UsersController::class, 'updateUsers'])->name('update.Users');
+    Route::get('index/search', [UsersController::class, 'search'])->name('users.Search');
 });
 
 // If the user is already logged in it will go back to index

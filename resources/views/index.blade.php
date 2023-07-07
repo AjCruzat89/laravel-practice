@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="pagination.css">
     <!-- Link BOOTSTRAP 5.3.0 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Bootstrap 4.0 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -20,14 +22,14 @@
         <p>Password: {{ substr($currentUser->password, 0, 12) }}</p>
     </div>
     @endif
-    
+
     <form method="GET" action="{{ route('logout') }}">
         @csrf
         <button name="logout" class="btn btn-primary">Logout</button>
     </form>
 
-    <form method="GET" action="{{ route('users.search') }}">
-        <div class="d-flex justify-content-center align-items-center">
+    <form method="GET" action="{{ route('users.Search') }}">
+        <div class="d-flex justify-content-center align-items-center py-2">
             <input type="search" name="keyword" id="" placeholder="Search..." class="p-1">
         </div>
     </form>
@@ -48,7 +50,7 @@
                     <th scope="row">{{ $user->id }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ substr($user->password, 0, 12) }}</td>
-                    <td><a class="btn btn-primary" href="{{ route('edit.users', $user->id ) }}">Edit</a></td>
+                    <td><button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-user-id="{{ $user->id }}" data-username="{{ $user->username }}" data-password="{{ $user->password }}">Edit</button></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -60,6 +62,56 @@
         {{ $users->links('vendor.pagination.custom') }}
     </div>
 
+    <form action="{{ route('update.Users') }}" method="POST">
+    @csrf
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="editUserId">
+                    <div class="form-group">
+                        <label for="editUsername">Username:</label>
+                        <input type="text" name="username" class="form-control" id="editUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPassword">Password:</label>
+                        <input type="text" name="password" class="form-control" id="editPassword">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- Bootstrap 4.0 JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.edit-button').click(function() {
+                var userId = $(this).data('user-id');
+                var username = $(this).data('username');
+                var password = $(this).data('password');
+
+                $('#editUserId').val(userId);
+                $('#editUsername').val(username);
+                $('#editPassword').val(password);
+            });
+        });
+    </script>
 </body>
 
 </html>

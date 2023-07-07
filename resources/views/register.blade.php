@@ -43,7 +43,7 @@
 
 
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary p-2" style="width: 100px;">Register</button>
+                            <button type="submit" class="btn btn-primary p-2" style="width: 100px;">Register</button>
                         </div>
 
                         <hr>
