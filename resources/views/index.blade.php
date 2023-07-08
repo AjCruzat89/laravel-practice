@@ -49,7 +49,7 @@
                 <tr>
                     <th scope="row">{{ $user->id }}</td>
                     <td>{{ $user->username }}</td>
-                    <td>{{ substr($user->password, 0, 12) }}</td>
+                    <td>{{ substr($user->password, 0, 10) }}</td>
                     <td><button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-user-id="{{ $user->id }}" data-username="{{ $user->username }}" data-password="{{ $user->password }}">Edit</button></td>
                 </tr>
                 @endforeach
@@ -63,35 +63,37 @@
     </div>
 
     <form action="{{ route('update.Users') }}" method="POST">
-    @csrf
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="editUserId">
-                    <div class="form-group">
-                        <label for="editUsername">Username:</label>
-                        <input type="text" name="username" class="form-control" id="editUsername">
+        @csrf
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" >Edit User Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="editPassword">Password:</label>
-                        <input type="text" name="password" class="form-control" id="editPassword">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editUserId">
+                        <div class="form-group">
+                            <label for="editUsername">Username:</label>
+                            <input type="text" name="username" class="form-control" id="editUsername" onclick="clearInput(this)">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPassword">Password:</label>
+                            <input type="text" name="password" class="form-control" id="editPassword" onclick="clearInput(this)">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
+    <button id="toggleDarkModeButton">Toggle Dark Mode</button>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -102,13 +104,47 @@
     <script>
         $(document).ready(function() {
             $('.edit-button').click(function() {
-                var userId = $(this).data('user-id');
-                var username = $(this).data('username');
-                var password = $(this).data('password');
+                var userId = $(this).attr('data-user-id');
+                var username = $(this).attr('data-username');
+                var password = $(this).attr('data-password');
 
                 $('#editUserId').val(userId);
                 $('#editUsername').val(username);
                 $('#editPassword').val(password);
+            });
+        });
+    </script>
+    <script>
+        function clearInput(input) {
+            input.value = '';
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            const toggleDarkModeButton = $('#toggleDarkModeButton');
+
+            // Check if dark mode preference is already stored
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+            // Apply the dark mode class if the preference is set
+            if (isDarkMode) {
+                $('body').addClass('dark-mode');
+                $('.table th, .table td').addClass('dark-mode-text');
+                $('.modal-header, .modal-body, .modal-footer').addClass('dark-mode');
+            }
+
+
+            // Toggle dark mode on button click
+            toggleDarkModeButton.on('click', function() {
+                // Toggle the dark mode class on the body element
+                $('body').toggleClass('dark-mode');
+                $('.table th, .table td').toggleClass('dark-mode-text');
+                $('.modal-header, .modal-body, .modal-footer').toggleClass('dark-mode');
+
+
+                // Store the dark mode preference in localStorage
+                const isDarkModeEnabled = $('body').hasClass('dark-mode');
+                localStorage.setItem('darkMode', isDarkModeEnabled);
             });
         });
     </script>

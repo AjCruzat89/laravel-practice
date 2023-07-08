@@ -49,7 +49,7 @@
                         <hr>
 
                         <div class="d-flex justify-content-center">
-                            <a class="link" href="login" style="text-decoration: none;">Login</a>
+                            <a class="link" href="{{ route('login.page') }}" style="text-decoration: none;">Login</a>
                         </div>
                     </div>
                 </div>

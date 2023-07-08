@@ -31,3 +31,13 @@
     background-color: #ccc;
   }
   
+
+  .dark-mode{
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .dark-mode-text{
+    color: white;
+  }
+

@@ -26,8 +26,8 @@ Route::middleware(['not_logged_in'])->group(function (){
 // If the user is already logged in it will go back to index
 Route::middleware(['already_logged_in'])->group(function (){
     Route::view('/','login');
-    Route::view('login','login');
-    Route::view('register','register');
+    Route::view('login','login')->name('login.page');   
+    Route::view('register','register')->name('register.page');
 });
 
 // Home Page, Login, Logout Controllers
